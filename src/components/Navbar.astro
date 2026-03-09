@@ -1,0 +1,113 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<nav class="flex justify-between items-start gap-3 text-white p-5 flex-row">
+  <a href="/" class="border-r-2 border-gray-600 pr-6">Rodrigo Jose</a>
+  <div class="flex items-center justify-center gap-4 sm:flex-col-reverse">
+    <ul
+      class="hidden flex-col sm:flex sm:flex-row items-center justify-center gap-1 sm:gap-7
+          absolute sm:static w-full top-20 left-0 z-20
+        font-mono text-medium
+        shadow-sm backdrop-blur-xs
+        sm:border-0 border border-neutral-700/50 transition-all"
+      id="navbar-container"
+    >
+      <a
+        href="/"
+        class="group relative transition duration-300 text-zinc-300 hover:text-white"
+        >home
+        <span
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out opacity-75"
+        ></span>
+      </a>
+      <a
+        href="/about"
+        class="group relative transition duration-300 text-zinc-300 hover:text-white"
+      >
+        about
+        <span
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out opacity-75"
+        ></span>
+      </a>
+      <a
+        href="/projects"
+        class="group relative transition duration-300 text-zinc-300 hover:text-white"
+        >projects
+        <span
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out opacity-75"
+        ></span>
+      </a>
+      <a
+        href="/contact"
+        class="group relative transition duration-300 text-zinc-300 hover:text-white"
+        >contact
+        <span
+          class="absolute bottom-0 left-0 w-full h-0.5 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out opacity-75"
+        ></span>
+      </a>
+    </ul>
+
+    <button
+      class="flex items-center text-gray-50 cursor-pointer hover:scale-105 hover:brightness-105 sm:hidden"
+      id="menu"
+      data-icon-state="open"
+    >
+      <Icon
+        name="mdi:menu"
+        class="w-8 h-8 transition-all duration-300 transform scale-100 opacity-100"
+        id="icon-open"
+      />
+      <Icon
+        name="mdi:close"
+        class="w-8 h-8 absolute transition-all duration-300 transform scale-0 opacity-0 rotate-90"
+        id="icon-close"
+      />
+    </button>
+  </div>
+</nav>
+
+<style>
+  .open-menu {
+    display: flex;
+    transform: translateY(0);
+    animation: open-menu 0.5s ease-in-out;
+  }
+
+  @keyframes open-menu {
+    0% {
+      transform: translateY(-500px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+</style>
+<script>
+  const initMenu = () => {
+    const menuButton = document.getElementById("menu");
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+    const navbarContainer = document.getElementById("navbar-container");
+
+    menuButton?.addEventListener("click", () => {
+      const isOpen = navbarContainer?.classList.toggle("open-menu");
+
+      if (isOpen) {
+        iconOpen?.classList.add("scale-0", "opacity-0", "-rotate-90");
+        iconOpen?.classList.remove("scale-100", "opacity-100");
+
+        iconClose?.classList.add("scale-100", "opacity-100", "rotate-0");
+        iconClose?.classList.remove("scale-0", "opacity-0", "rotate-90");
+      } else {
+        iconOpen?.classList.remove("scale-0", "opacity-0", "-rotate-90");
+        iconOpen?.classList.add("scale-100", "opacity-100");
+
+        iconClose?.classList.remove("scale-100", "opacity-100", "rotate-0");
+        iconClose?.classList.add("scale-0", "opacity-0", "rotate-90");
+      }
+    });
+  };
+
+  document.addEventListener("astro:page-load", initMenu);
+</script>

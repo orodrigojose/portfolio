@@ -1,0 +1,48 @@
+---
+interface Props {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+}
+const { x1, y1, x2, y2 } = Astro.props;
+---
+
+<g class="ctos-connection">
+  <line
+    x1={`${x1}`}
+    y1={`${y1}`}
+    x2={`${x2}`}
+    y2={`${y2}`}
+    class="stroke-white/10"
+    stroke-width="0.1"></line>
+
+  <line
+    x1={`${x1}`}
+    y1={`${y1}`}
+    x2={`${x2}`}
+    y2={`${y2}`}
+    class="scan-line stroke-white/40"
+    stroke-width="0.1"></line>
+</g>
+
+<style>
+  @keyframes scan {
+    0% {
+      stroke-dashoffset: 100;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+
+  .scan-line {
+    stroke-dasharray: 10, 90;
+    animation: scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+</style>

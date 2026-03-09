@@ -1,0 +1,186 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import Connection from "../components/Connection.astro";
+import ModalProject from "../components/ModalProject.astro";
+
+interface Iproject {
+  name: string;
+  description: string;
+  preview: string;
+  image: string;
+  x: number;
+  y: number;
+  stacks: string[];
+}
+
+const projects: Iproject[] = [
+  {
+    x: 50,
+    y: 50,
+
+    name: "Portfolio",
+    description:
+      "My personal Portfolio with my projects, programming journey and represents a little bit about my personality.",
+    preview: "https://rodrigojose.dev/",
+    image: "/projects/portfolio.png",
+    stacks: ["astro", "typescript", "tailwindcss"],
+  },
+  {
+    x: 30,
+    y: 30,
+    name: "Senjuhair",
+    description:
+      "Developed the Visual Identity and Landing Page to enhance lead generation and professional presentation.",
+    preview: "https://senjuhair.vercel.app/",
+    image: "/projects/senju.png",
+    stacks: ["astro", "typescript", "tailwindcss"],
+  },
+  {
+    x: 70,
+    y: 35,
+    name: "Whatscall",
+    description:
+      "Software for WhatsApp lead prospection and bulk messaging, reaching and surpassing the milestone of R$ 200,000 in monthly revenue.",
+    preview:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7396741206937939968/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7396741206937939968%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D2DAQH15jECobYiWQ/profile-treasury-image-shrink_800_800/B4DZqaDv1kGkAY-/0/1763521265597?e=1773507600&v=beta&t=7tw5RbipXOrWB2TG4zsfPG0v04PoUx0L_Sprj-jw350",
+    stacks: ["javascript", "expressjs", "tailwindcss", "nodejs"],
+  },
+  {
+    x: 50,
+    y: 15,
+    name: "Whatscall",
+    description:
+      "Software for WhatsApp lead prospection and bulk messaging, reaching and surpassing the milestone of R$ 200,000 in monthly revenue.",
+    preview:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7396741206937939968/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7396741206937939968%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D2DAQH15jECobYiWQ/profile-treasury-image-shrink_800_800/B4DZqaDv1kGkAY-/0/1763521265597?e=1773507600&v=beta&t=7tw5RbipXOrWB2TG4zsfPG0v04PoUx0L_Sprj-jw350",
+    stacks: ["javascript", "expressjs", "tailwindcss", "nodejs"],
+  },
+];
+
+const links = [
+  { from: projects[0], to: projects[1] },
+  { from: projects[0], to: projects[2] },
+  { from: projects[0], to: projects[3] },
+];
+---
+
+<Layout title="Projects">
+  <ModalProject />
+  <div
+    class="relative w-full h-screen overflow-hidden text-white font-sans tracking-tight"
+  >
+    <div class="top-8 left-8 pl-4 py-1 pointer-events-none">
+      <div class="text-3xl text-medium items-center flex gap-4">
+        <Icon name="mdi:computer" />
+        <h2>Projects</h2>
+      </div>
+    </div>
+
+    <svg
+      class="absolute inset-0 w-full h-full pointer-events-none"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+    >
+      {
+        links.map((link) => (
+          <Connection
+            x1={link.from.x}
+            y1={link.from.y}
+            x2={link.to.x}
+            y2={link.to.y}
+          />
+        ))
+      }
+    </svg>
+
+    {
+      projects.map((project) => (
+        <div
+          style={`left: ${project.x}%; top: ${project.y}%; transform: translate(-50%, -50%);`}
+          class="absolute group project-trigger"
+          data-project={JSON.stringify(project)}
+        >
+          <div class="relative flex items-center justify-center cursor-pointer">
+            <div class="absolute w-8 h-8 border border-white/0 rounded-full group-hover:border-white/20 group-hover:scale-125 transition-all duration-500" />
+
+            <div class="w-1.5 h-1.5 bg-white rounded-full  group-hover:bg-white group-hover:shadow-white transition-all duration-300" />
+
+            <div class="absolute left-6 whitespace-nowrap overflow-hidden">
+              <span class="block text-[11px] font-light uppercase tracking-widest text-white/50 group-hover:text-white transition-colors">
+                {project.name}
+              </span>
+            </div>
+          </div>
+
+          <div class="absolute top-6 left-6 w-48 p-3 bg-white/[0.03] border-l border-white/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 group-focus:translate-x-0 transition-all duration-300 pointer-events-none">
+            <p class="text-[10px] text-white/60 leading-relaxed font-light">
+              {project.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
+
+<script>
+import type { Icon } from "astro/runtime/client/dev-toolbar/ui-library/icons.js";
+
+  const initModal = () => {
+    const modalContainer = document.getElementById("modal-container");
+    const closeBtn = document.getElementById("close-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalImage = document.getElementById("modal-image");
+    const modalStacks = document.getElementById("modal-stacks");
+    const modalDescription = document.getElementById("modal-description");
+
+    let selectedProject = {};
+
+    function toggleModal() {
+      if (modalContainer.classList.contains("hidden")) {
+        modalContainer.classList.remove("hidden");
+        document.body.classList.remove("overflow-hidden");
+      } else {
+        modalContainer.classList.add("hidden");
+        document.body.classList.add("overflow-hidden");
+      }
+    }
+
+    const selectProject = (project: {
+      name?: any;
+      image?: any;
+      description?: any;
+      stacks?: any;
+    }) => {
+      if (!modalContainer) return;
+
+      modalTitle.textContent = project.name;
+      modalImage.src = project.image;
+      modalDescription.textContent = project.description;
+
+      selectedProject = project;
+      toggleModal();
+    };
+
+    const projectElements = document.querySelectorAll(".project-trigger");
+
+    projectElements.forEach((el) => {
+      el.addEventListener("click", () => {
+        const projectData = JSON.parse(el.getAttribute("data-project"));
+
+        selectProject(projectData);
+      });
+    });
+
+    closeBtn?.addEventListener("click", () => {
+      modalContainer.classList.add("hidden");
+    });
+  };
+
+  document.addEventListener("astro:page-load", initModal);
+</script>

@@ -1,0 +1,30 @@
+---
+import Stacks from "../Stacks.astro";
+
+interface Props {
+  name: string;
+  local: string;
+}
+
+const { name, local } = Astro.props;
+---
+
+<div
+  class="relative block overflow-hidden border border-neutral-400 p-4 sm:p-6 lg:p-8"
+>
+  <div class="w-full">
+    <div class="text-gray-50 flex justify-between items-center">
+      <h1 class="text-4xl pr-2 sm:text-4xl font-bold">
+        {name}
+      </h1>
+      <div class="flex gap-1 sm:gap-3"></div>
+    </div>
+    <p class="mt-1 font-medium text-gray-500 text-xl">{local}</p>
+    <div class="mt-4">
+      <p class="text-pretty text-lg sm:text-xl text-neutral-50">
+        <slot />
+      </p>
+      <Stacks />
+    </div>
+  </div>
+</div>

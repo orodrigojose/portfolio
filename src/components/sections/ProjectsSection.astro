@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon/components";
+import ProjectCard from "../ProjectCard.astro";
+
+interface Iproject {
+  name: string;
+  description: string;
+  preview: string;
+  image: string;
+  stacks: string[];
+}
+
+const projects: Iproject[] = [
+  {
+    name: "Senjuhair",
+    description:
+      "Developed the Visual Identity and Landing Page to enhance lead generation and professional presentation.",
+    preview: "https://senjuhair.vercel.app/",
+    image: "/projects/senju.png",
+    stacks: ["astro", "typescript", "tailwindcss"],
+  },
+  {
+    name: "Portfolio",
+    description:
+      "My personal Portfolio with my projects, programming journey and represents a little bit about my personality.",
+    preview: "https://rodrigojose.dev/",
+    image: "/projects/portfolio.png",
+    stacks: ["astro", "typescript", "tailwindcss"],
+  },
+  {
+    name: "Whatscall",
+    description:
+      "Software for WhatsApp lead prospection and bulk messaging, reaching and surpassing the milestone of R$ 200,000 in monthly revenue.",
+    preview:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7396741206937939968/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7396741206937939968%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D2DAQH15jECobYiWQ/profile-treasury-image-shrink_800_800/B4DZqaDv1kGkAY-/0/1763521265597?e=1773507600&v=beta&t=7tw5RbipXOrWB2TG4zsfPG0v04PoUx0L_Sprj-jw350",
+    stacks: ["javascript", "expressjs", "tailwindcss", "nodejs"],
+  },
+];
+---
+
+<section class="text-gray-50 mt-15 flex flex-col">
+  <div class="text-2xl text-medium items-center flex gap-4">
+    <h2>Projects</h2>
+    <Icon name="mdi:code" />
+  </div>
+  <div
+    class="py-4 w-full grid place-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-flow-row-dense gap-4"
+  >
+    {projects.map((project: Iproject) => <ProjectCard {...project} />)}
+  </div>
+</section>

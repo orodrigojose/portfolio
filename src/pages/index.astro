@@ -1,0 +1,45 @@
+---
+import ExperienceSection from "../components/sections/ExperienceSection.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import InfoCard from "../components/sections/InfoCard.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Rodrigo Jose Developer">
+  <main>
+    <section>
+      <div class="absolute inset-0 pointer-events-none">
+        <div
+          class="absolute inset-0 opacity-25"
+          style="
+          background-image: radial-gradient(white 1px, transparent 1px);
+          background-size: 20px 20px;
+          mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+          -webkit-mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+        "
+        >
+        </div>
+      </div>
+      <InfoCard name="Rodrigo Jose" local="São Paulo, Brazil">
+        Software Developer with 6+ years of experience delivering complex
+        applications focused on scalability and self-sustaining structures.
+      </InfoCard>
+    </section>
+    <AboutSection>
+      I am a Software Developer currently working as a Software Engineer at Tem
+      Credito. I began my programming journey at the age of 12 and now have over
+      6 years of experience in the field. Alongside my professional work, I am
+      pursuing a Bachelor’s degree in Computer Science at Anhembi Morumbi
+      University.
+    </AboutSection>
+    <ExperienceSection />
+    <ProjectsSection />
+  </main>
+</Layout>

@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import Asciiart from "../components/Asciiart.astro";
+
+const skills = [
+  "astro",
+  "nestjs",
+  "python",
+  "typescript",
+  "javascript",
+  "java",
+  "spring",
+  "postgresql",
+  "mysql",
+  "mongodb",
+  "cloudflare",
+  "linux",
+];
+---
+
+<Layout title="About Rodrigo">
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute inset-0 opacity-10"
+      style="
+          background-image: radial-gradient(white 1px, transparent 1px);
+          background-size: 20px 20px;
+          mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+          -webkit-mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+        "
+    >
+    </div>
+  </div>
+  <section id="about" class="flex flex-col md:flex-row w-full gap-12 mb-10">
+    <div
+      class="flex flex-col items-center md:items-start justify-center w-full text-gray-100"
+    >
+      <div
+        class="flex gap-8 items-center text-4xl font-medium text-pretty p-4 font-mono"
+      >
+        <Icon name="mdi:person" />
+        <h1>About me</h1>
+      </div>
+      <p
+        class="text-pretty mt-2 text-gray-100 w-1/2 font-mono text-lg text-whiterounded"
+      >
+        My name is Rodrigo! I'm a Back-end Developer/Software Engineer. I've
+        been studying programming since I was 12 years old and I'm currently
+        pursuing a degree in Computer Science at Anhembi Morumbi University
+        (UAM)
+        <span
+          class="inline-block h-5 w-2 bg-gray-100 animate-pulse align-middle ml-1"
+        ></span>
+      </p>
+    </div>
+    <div
+      class="flex items-center justify-center w-full md:w-1/4 opacity-20"
+      transition:animate="slide"
+    >
+      <Asciiart />
+    </div>
+  </section>
+
+  <section
+    id="skills"
+    class="flex flex-row-reverse items-center justify-center w-full mb-10 mt-10 border-2"
+  >
+    <div class="flex flex-col items-end justify-center text-gray-100">
+      <div
+        class="flex gap-8 items-center text-4xl font-medium text-pretty p-4 font-mono"
+      >
+        <h1>Skills</h1>
+        <Icon name="mdi:spider-web" />
+      </div>
+      <p
+        class="text-pretty mt-2 text-gray-100 w-1/2 font-mono text-lg text-whiterounded"
+      >
+        I am passionate about exploring technology and teaching myself new
+        languages. Currently, I am deepening my knowledge in Programming,
+        Cybersecurity, and Pentesting. To support my international growth, I am
+        focused on mastering English, with plans to challenge myself with
+        Mandarin in the future.
+        <span
+          class="inline-block h-5 w-2 bg-gray-100 animate-pulse align-middle ml-1"
+        ></span>
+      </p>
+    </div>
+    <div
+      class="w-full text-gray-200 flex flex-col gap-4"
+      transition:animate="slide"
+    >
+      <div>
+        <span class="font-mono text-neutral-500">languages:</span>
+        <ul class="flex flex-col text-neutral-200">
+          <li class="flex gap-4">
+            Japanse:<p class="font-bold text-white">N5(Basic)</p>
+          </li>
+          <li class="flex gap-4">
+            English:<p class="font-bold text-white">Advanced</p>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <span class="font-mono text-neutral-500">stacks:</span>
+        <ul class="text-2xl flex flex-wrap gap-2">
+          {
+            skills.map((skill) => (
+              <li>
+                <Icon name={`devicon-plain:${skill}`} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

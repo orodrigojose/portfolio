@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  name: string;
+  description: string;
+  preview: string;
+  image: string;
+  stacks: string[];
+}
+
+const project: Props = Astro.props;
+---
+
+<a
+  href={project.preview}
+  class="flex flex-col w-full h-70 items-center justify-center gap-4 overflow-hidden border border-neutral-600/25 hover:border-neutral-200/50 hover:shadow-2xs shadow-bg-neutral-300 hover:scale-105 transition-all cursor-pointer"
+>
+  <header class="flex flex-col items-start justify-end h-1/3">
+    <span class="absolute z-10 text-lg px-4 py-1.5 font-mono text-medium"
+      >{project.name}</span
+    >
+    <div
+      class="relative z-0 w-full h-30 overflow-hidden brightness-45 border-b-2 border-b-neutral-500/20 shadow-lg"
+    >
+      <img class="object-cover" src={project.image} />
+    </div>
+  </header>
+  <div class="flex flex-col px-4 h-2/3 justify-around gap-2">
+    <p class="text-pretty text-[9pt] w-full">{project.description}</p>
+    <div class="flex items-center justify-between">
+      <span class="text-[8pt] w-full text-neutral-600">made w/</span>
+      <ul
+        class="flex p-2 gap-2 text-xl items-center justify-end w-full text-neutral-300"
+      >
+        {
+          project.stacks &&
+            project.stacks.map((stack) => <Icon name={`lineicons:${stack}`} />)
+        }
+      </ul>
+    </div>
+  </div>
+</a>
