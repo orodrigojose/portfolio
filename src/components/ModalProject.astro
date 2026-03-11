@@ -3,11 +3,11 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div
-  class="absolute flex items-center justify-center z-40 left-0 top-0 w-full h-full backdrop-blur-3xl shadow-2xl bg-neutral-950/80"
+  class="hidden absolute flex items-center justify-center z-40 left-0 top-0 w-full h-full backdrop-blur-3xl shadow-2xl bg-neutral-950/80"
   id="modal-container"
 >
   <div
-    class="flex flex-col w-[400px] min-h-36 bg-neutral-800 border-2 border-neutral-700 shadow-2xl rounded-lg overflow-hidden"
+    class="flex flex-col w-[400px] min-h-36 bg-neutral-900 border-2 border-neutral-700 shadow-2xl rounded-lg overflow-hidden"
     id="modal-content"
   >
     <header class="flex items-center justify-between gap-10h-1/3 relative">
@@ -19,29 +19,22 @@ import { Icon } from "astro-icon/components";
       >
         <img class="object-cover" src="/projects/senju.png" id="modal-image" />
       </div>
+      <a
+        class="absolute top-2 right-8 z-30 text-white cursor-pointer flex justify-center items-center gap-2 text-xl hover:brightness-70 transition-all hover:scale-105"
+        id="modal-preview"><Icon name="mdi:earth" /></a
+      >
       <button
-        class="absolute top-2 right-2 z-30 text-white cursor-pointer"
+        class="absolute top-2 right-2 z-30 text-white cursor-pointer text-xl hover:brightness-70 transition-all hover:scale-105"
         id="close-modal"
       >
         <Icon name="mdi:close" />
       </button>
     </header>
     <main
-      class="flex flex-col items-center justify-center w-full h-full text-gray-200"
+      class="flex flex-col items-center justify-center w-full h-full text-gray-200 p-2"
     >
-      <p id="modal-description" class="text-pretty p-2 text-neutral-300">
-        fjadlfjdska fjdlsajfdlsafj sal fjslakjfsa fjadlfjdska fjdlsajfdlsafj sal
-        fjslakjfsa fjadlfjdska fjdlsajfdlsafj sal fjslakjfsa fjadlfjdska
-        fjdlsajfdlsafj sal fjslakjfsa fjadlfjdska fjdlsajfdlsafj sal fjslakjfsa
-        fjadlfjdska fjdlsajfdlsafj sal fjslakjfsa fjadlfjdska fjdlsajfdlsafj sal
-        fjslakjfsa
-      </p>
-      <div class="flex items-center justify-between w-full">
-        <a
-          class="flex items-center justify-center bg-gray-500 border-2 border-gray-500 p-1 w-full"
-          id="modal-preview"><Icon name="mdi:arrow-right" />Go App</a
-        >
-      </div>
+      <p id="modal-description" class="text-pretty p-2 text-neutral-300"></p>
+      <div class="flex items-center justify-between w-full"></div>
     </main>
   </div>
 </div>

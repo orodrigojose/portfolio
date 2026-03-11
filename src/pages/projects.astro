@@ -48,34 +48,23 @@ const projects: Iproject[] = [
       "https://media.licdn.com/dms/image/v2/D4D2DAQH15jECobYiWQ/profile-treasury-image-shrink_800_800/B4DZqaDv1kGkAY-/0/1763521265597?e=1773507600&v=beta&t=7tw5RbipXOrWB2TG4zsfPG0v04PoUx0L_Sprj-jw350",
     stacks: ["javascript", "expressjs", "tailwindcss", "nodejs"],
   },
-  {
-    x: 50,
-    y: 15,
-    name: "Whatscall",
-    description:
-      "Software for WhatsApp lead prospection and bulk messaging, reaching and surpassing the milestone of R$ 200,000 in monthly revenue.",
-    preview:
-      "https://www.linkedin.com/feed/update/urn:li:activity:7396741206937939968/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7396741206937939968%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29",
-    image:
-      "https://media.licdn.com/dms/image/v2/D4D2DAQH15jECobYiWQ/profile-treasury-image-shrink_800_800/B4DZqaDv1kGkAY-/0/1763521265597?e=1773507600&v=beta&t=7tw5RbipXOrWB2TG4zsfPG0v04PoUx0L_Sprj-jw350",
-    stacks: ["javascript", "expressjs", "tailwindcss", "nodejs"],
-  },
 ];
 
 const links = [
   { from: projects[0], to: projects[1] },
   { from: projects[0], to: projects[2] },
-  { from: projects[0], to: projects[3] },
 ];
 ---
 
-<Layout title="Projects">
+<Layout title="Projects" description="A showcase of projects i created including web apps and utilities." keywords="projects,portfolio,Rodrigo Jose,web applications">
   <ModalProject />
   <div
     class="relative w-full h-screen overflow-hidden text-white font-sans tracking-tight"
   >
     <div class="top-8 left-8 pl-4 py-1 pointer-events-none">
-      <div class="text-3xl text-medium items-center flex gap-4">
+      <div
+        class="text-3xl text-medium items-center flex gap-4 border-l-4 border-neutral-100/10 p-2"
+      >
         <Icon name="mdi:computer" />
         <h2>Projects</h2>
       </div>
@@ -129,7 +118,7 @@ const links = [
 </Layout>
 
 <script>
-import type { Icon } from "astro/runtime/client/dev-toolbar/ui-library/icons.js";
+  import type { Icon } from "astro/runtime/client/dev-toolbar/ui-library/icons.js";
 
   const initModal = () => {
     const modalContainer = document.getElementById("modal-container");
@@ -142,6 +131,7 @@ import type { Icon } from "astro/runtime/client/dev-toolbar/ui-library/icons.js"
     let selectedProject = {};
 
     function toggleModal() {
+      if (!modalContainer) return;
       if (modalContainer.classList.contains("hidden")) {
         modalContainer.classList.remove("hidden");
         document.body.classList.remove("overflow-hidden");

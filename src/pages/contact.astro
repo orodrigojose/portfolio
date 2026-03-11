@@ -1,5 +1,142 @@
 ---
+import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
+
+const contacts = [
+  {
+    icon: "mdi:linkedin",
+    link: "https://linkedin.com/in/orodrigojose",
+    label: "orodrigojose",
+  },
+  {
+    icon: "mdi:email",
+    link: "mailto:contato.rodrigosilv@gmail.com",
+    label: "contato.rodrigosilv@gmail.com",
+  },
+  {
+    icon: "mdi:whatsapp",
+    link: "https://wa.me/5511964917399",
+    label: "(11) 96491-7399",
+  },
+];
 ---
 
-<Layout title="Contact me"></Layout>
+<Layout title="Contact me" description="Contact me via email, LinkedIn, or WhatsApp." keywords="contact,Rodrigo Jose,email,LinkedIn,WhatsApp">
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute inset-0 opacity-25"
+      style="
+          background-image: radial-gradient(white 1px, transparent 1px);
+          background-size: 20px 20px;
+          mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+          -webkit-mask-image: 
+            radial-gradient(circle at 20% 30%, black 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, black 0%, transparent 35%),
+            radial-gradient(circle at 50% 10%, black 0%, transparent 25%);
+        "
+    >
+    </div>
+  </div>
+  <section class="relative flex flex-col text-gray-50 mt-15 justify-center items-center w-full">
+    <div
+      class="flex gap-4 items-center text-2xl font-medium text-pretty p-2 font-mono"
+    >
+      <h2>Contact me</h2>
+      <Icon name="mdi:contact" />
+    </div>
+
+    <div
+      class="mt-8 w-full flex flex-col md:flex-row-reverse items-start sm:items-center justify-between gap-8 px-4"
+    >
+      <ul class="flex flex-col gap-4 text-gray-200">
+        {
+          contacts.map((contact) => (
+            <li>
+              <a
+                href={contact.link}
+                class="group flex items-center gap-3 text-[10pt] text-zinc-300 hover:text-white transition"
+              >
+                <Icon name={contact.icon} class="w-6 h-6" />
+                <span>{contact.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <form
+        action="https://formsubmit.co/contato.rodrigosilv@gmail.com"
+        method="POST"
+        class="w-full sm:w-2/3 max-w-md flex flex-col"
+      >
+        <label for="email" class="block mb-2 text-sm font-medium text-heading">
+          Your Email
+        </label>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 flex items-center ps-3 pointer-events-none"
+          >
+            <Icon name="mdi:email" />
+          </div>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="block w-full ps-9 pe-3 py-2.5 bg-neutral-950 rounded-lg border border-neutral-600 text-heading text-sm shadow-xs outline-none focus:outline-2 focus:outline-neutral-500 placeholder:text-body"
+            placeholder="youremail@gmail.com"
+          />
+        </div>
+
+        <label
+          for="name"
+          class="block mb-2 mt-4 text-sm font-medium text-heading"
+        >
+          Your Name
+        </label>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 flex items-center ps-3 pointer-events-none"
+          >
+            <Icon name="mdi:person" />
+          </div>
+          <input
+            type="text"
+            id="name"
+            required
+            name="name"
+            class="block w-full ps-9 pe-3 py-2.5 bg-neutral-950 rounded-lg border border-neutral-600 text-heading text-sm shadow-xs outline-none focus:outline-2 focus:outline-neutral-500 placeholder:text-body"
+            placeholder="name"
+          />
+        </div>
+
+        <label
+          for="message"
+          class="block mb-2 mt-4 text-sm font-medium text-heading"
+        >
+          Message
+        </label>
+        <textarea
+          name="message"
+          id="message"
+          required
+          class="block w-full h-[200px] ps-2.5 py-2.5 bg-neutral-950 rounded-lg border border-neutral-600 text-sm shadow-xs outline-none focus:outline-2 focus:outline-neutral-500 placeholder:text-body"
+          placeholder="Your project idea or something do you want to talk about w/ me."></textarea>
+
+        <input type="hidden" name="_subject" value="Email received from portfolio!" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://www.rodrigojose.dev/email" />
+
+        <button
+          class="mt-4 py-2 px-4 border-2 border-neutral-900 bg-neutral-300 text-neutral-900 font-semibold rounded-lg hover:brightness-110 hover:border-neutral-300 hover:text-neutral-300 cursor-pointer hover:bg-transparent transition-all"
+          type="submit"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>

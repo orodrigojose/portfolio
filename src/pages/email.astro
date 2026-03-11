@@ -1,0 +1,23 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout tittle="Thanks for Contact me!">
+  <main
+    class="w-full flex flex-col justify-center items-center text-gray-200 gap-8" transition:animate="slide"
+  >
+    <h1 class="text-4xl flex items-baseline justify-center gap-2">
+      Thanks for Contact me!
+      <span
+        class="inline-block h-1 w-6 bg-gray-100 animate-pulse align-middle ml-1"
+      ></span>
+    </h1>
+
+    <a
+      href="/"
+      class="flex justify-center items-center text-lg gap-2 cursor-pointer border-b-2 border-transparent hover:border-b-neutral-400 transition-all"
+      ><Icon name="mdi:home" /> /home</a
+    >
+  </main>
+</Layout>

@@ -6,9 +6,17 @@ import "../styles/global.css";
 
 interface LayoutProps {
   title?: string;
+  description?: string;
+  keywords?: string;
 }
 
-const { title }: LayoutProps = Astro.props;
+const {
+  title,
+  description =
+    "Portfolio of Rodrigo Jose - Software developer specializing in scalable, modern web applications.",
+  keywords =
+    "Rodrigo Jose, software developer, portfolio, astro, typescript, javascript, backend, frontend, fullstack",
+}: LayoutProps = Astro.props;
 ---
 
 <!doctype html>
@@ -19,9 +27,44 @@ const { title }: LayoutProps = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- SEO meta -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={`${Astro.site}${Astro.url.pathname}`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${Astro.site}${Astro.url.pathname}`} />
+    <meta property="og:image" content="/favicon.svg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/favicon.svg" />
+
     <ClientRouter />
   </head>
-  <body class="bg-zinc-950">
+  <body class="bg-zinc-950 flex flex-col items-center justify-between">
+    <!-- Structured data for Person -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Rodrigo Jose",
+        url: Astro.site,
+        sameAs: [
+          "https://linkedin.com/in/orodrigojose",
+          "mailto:contato.rodrigosilv@gmail.com",
+          "https://wa.me/5511964917399",
+        ],
+        jobTitle: "Software Developer",
+      })}
+    </script>
     <header class="w-full">
       <Navbar />
     </header>
