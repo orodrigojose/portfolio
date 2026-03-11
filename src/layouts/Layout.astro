@@ -17,6 +17,19 @@ const {
   keywords =
     "Rodrigo Jose, software developer, portfolio, astro, typescript, javascript, backend, frontend, fullstack",
 }: LayoutProps = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Rodrigo Jose",
+  url: Astro.site?.toString() || "https://rodrigojose.dev",
+  sameAs: [
+    "https://linkedin.com/in/orodrigojose",
+    "mailto:contato.rodrigosilv@gmail.com",
+    "https://wa.me/5511964917399",
+  ],
+  jobTitle: "Software Developer",
+};
 ---
 
 <!doctype html>
@@ -44,20 +57,7 @@ const {
     <ClientRouter />
   </head>
   <body class="bg-zinc-950 flex flex-col items-center justify-between">
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Rodrigo Jose",
-        url: Astro.site?.toString() || "https://rodrigojose.dev",
-        sameAs: [
-          "https://linkedin.com/in/orodrigojose",
-          "mailto:contato.rodrigosilv@gmail.com",
-          "https://wa.me/5511964917399",
-        ],
-        jobTitle: "Software Developer",
-      })}
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <header class="w-full">
       <Navbar />
     </header>
