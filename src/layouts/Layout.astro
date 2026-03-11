@@ -27,30 +27,23 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-
-    <!-- SEO meta -->
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={`${Astro.site}${Astro.url.pathname}`} />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={`${Astro.site}${Astro.url.pathname}`} />
-    <meta property="og:image" content="/favicon.svg" />
-
-    <!-- Twitter -->
+    <meta property="og:image" content="/social-preview.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/favicon.svg" />
+    <meta name="twitter:image" content="/social-preview.svg" />
 
     <ClientRouter />
   </head>
   <body class="bg-zinc-950 flex flex-col items-center justify-between">
-    <!-- Structured data for Person -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
