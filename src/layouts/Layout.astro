@@ -49,7 +49,7 @@ const {
         "@context": "https://schema.org",
         "@type": "Person",
         name: "Rodrigo Jose",
-        url: Astro.site,
+        url: Astro.site?.toString() || "https://rodrigojose.dev",
         sameAs: [
           "https://linkedin.com/in/orodrigojose",
           "mailto:contato.rodrigosilv@gmail.com",
