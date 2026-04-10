@@ -62,14 +62,40 @@ const structuredData = {
       <Navbar />
     </header>
     <main
-      class="w-full flex flex-col justify-center items-center mt-12"
+      class="w-full flex flex-col justify-center items-center mt-12 reveal"
       transition:animate="fade"
+      id="main-content"
     >
       <section class="w-11/12 sm:w-5/6 xl:w-3/5">
         <slot />
       </section>
     </main>
     <Footer />
+
+    <script>
+      const initReveal = () => {
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll(".reveal");
+        revealElements.forEach((el) => observer.observe(el));
+      };
+
+      document.addEventListener("astro:page-load", initReveal);
+      // Fallback for initial load
+      document.addEventListener("DOMContentLoaded", initReveal);
+    </script>
   </body>
 </html>
 

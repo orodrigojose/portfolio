@@ -1,28 +1,58 @@
 @import "tailwindcss";
 
 @layer base {
-  /* Custom Scrollbar */
+  :root {
+    --hacking-green: #00ff41;
+    --hacking-dark: #0a0a0a;
+  }
+
+  /* Hacking Scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #09090b; /* zinc-950 */
+    background: var(--hacking-dark);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #27272a; /* zinc-800 */
-    border: 2px solid #09090b;
-    border-radius: 10px;
+    background: #333;
+    border-radius: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46; /* zinc-700 */
+    background: var(--hacking-green);
+    box-shadow: 0 0 10px var(--hacking-green);
+  }
+
+  /* Reveal Animation */
+  .reveal {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+    position: relative;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+
+  /* Selection style */
+  ::selection {
+    background: var(--hacking-green);
+    color: var(--hacking-dark);
   }
 
   /* Firefox support */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #27272a #09090b;
+    scrollbar-color: #333 var(--hacking-dark);
   }
 }
