@@ -3,38 +3,77 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div
-  class="hidden absolute flex items-center justify-center z-40 left-0 top-0 w-full h-full backdrop-blur-3xl shadow-2xl bg-neutral-950/80"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-neutral-950/40 backdrop-blur-sm"
   id="modal-container"
 >
   <div
-    class="flex flex-col w-[400px] min-h-36 bg-neutral-900 border-2 border-neutral-700 shadow-2xl rounded-lg overflow-hidden"
+    class="relative w-full max-w-lg overflow-hidden transition-all duration-300 scale-95 opacity-0 bg-neutral-900/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-md"
     id="modal-content"
   >
-    <header class="flex items-center justify-between gap-10h-1/3 relative">
-      <span
-        class="absolute z-10 text-lg px-4 py-1.5 bottom-2 font-mono font-extrabold text-gray-100"
-        id="modal-title"></span>
-      <div
-        class="relative z-0 w-full h-30 overflow-hidden brightness-45 border-b-2 border-b-neutral-500/20 shadow-lg"
-      >
-        <img class="object-cover" src="/projects/senju.png" id="modal-image" />
+    <header class="relative h-64 overflow-hidden group">
+      <div class="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent z-10"></div>
+      <img 
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+        src="/projects/senju.png" 
+        id="modal-image" 
+        alt="Project Preview"
+      />
+      
+      <div class="absolute top-4 right-4 z-20 flex gap-2">
+        <a
+          id="modal-preview"
+          href="#"
+          target="_blank"
+          class="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all border border-white/10 hover:scale-110"
+          title="Visit project"
+        >
+          <Icon name="mdi:earth" class="w-5 h-5" />
+        </a>
+        <button
+          id="close-modal"
+          class="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all border border-white/10 hover:scale-110 cursor-pointer"
+          title="Close"
+        >
+          <Icon name="mdi:close" class="w-5 h-5" />
+        </button>
       </div>
-      <a
-        class="absolute top-2 right-8 z-30 text-white cursor-pointer flex justify-center items-center gap-2 text-xl hover:brightness-70 transition-all hover:scale-105"
-        id="modal-preview"><Icon name="mdi:earth" /></a
-      >
-      <button
-        class="absolute top-2 right-2 z-30 text-white cursor-pointer text-xl hover:brightness-70 transition-all hover:scale-105"
-        id="close-modal"
-      >
-        <Icon name="mdi:close" />
-      </button>
+
+      <div class="absolute bottom-6 left-6 z-20">
+        <h3 class="text-2xl font-bold text-white tracking-tight font-mono" id="modal-title"></h3>
+      </div>
     </header>
-    <main
-      class="flex flex-col items-center justify-center w-full h-full text-gray-200 p-2"
-    >
-      <p id="modal-description" class="text-pretty p-2 text-neutral-300"></p>
-      <div class="flex items-center justify-between w-full"></div>
+
+    <main class="p-6 pt-2">
+      <p id="modal-description" class="text-neutral-300 leading-relaxed mb-6 font-light text-sm sm:text-base"></p>
+      
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-neutral-500">Stacks</span>
+          <div id="modal-stacks-container" class="flex flex-wrap gap-2 text-neutral-400">
+            <!-- Stacks will be injected here -->
+          </div>
+        </div>
+
+        <a 
+          id="modal-visit"
+          href="#" 
+          target="_blank" 
+          class="mt-4 flex items-center justify-center gap-2 w-full py-3 px-4 bg-white text-black font-mono text-sm font-bold rounded-xl hover:bg-neutral-200 transition-colors group"
+        >
+          VISIT PROJECT
+          <Icon name="mdi:arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </a>
+      </div>
     </main>
   </div>
 </div>
+
+<style>
+  #modal-container.is-open {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  #modal-container.is-open #modal-content {
+    @apply scale-100 opacity-100;
+  }
+</style>
