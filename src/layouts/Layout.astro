@@ -21,6 +21,7 @@ const {
 const siteUrl = Astro.site ?? new URL("https://rodrigojose.dev");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const socialImageUrl = new URL("/social-preview.svg", siteUrl);
+const isProjectsPage = Astro.url.pathname === "/projects";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -77,7 +78,10 @@ const structuredData = {
       <Navbar />
     </header>
     <main
-      class="w-full flex flex-col justify-center items-center mt-12 reveal"
+      class:list={[
+        "w-full flex flex-col justify-center items-center mt-12",
+        !isProjectsPage && "reveal",
+      ]}
       transition:animate="fade"
       id="main-content"
       tabindex="-1"

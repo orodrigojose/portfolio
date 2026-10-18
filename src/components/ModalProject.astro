@@ -3,16 +3,21 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div
-  class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-neutral-950/40 backdrop-blur-sm w-full h-full"
+  class="fixed inset-0 z-50 grid h-dvh w-full place-items-center overflow-y-auto bg-neutral-950/60 p-4 opacity-0 pointer-events-none backdrop-blur-sm transition-all duration-300 ease-out sm:p-6"
   id="modal-container"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+  aria-hidden="true"
 >
   <div
-    class="relative w-full h-auto max-h-[90vh] max-w-lg overflow-y-auto transition-all duration-300 scale-95 opacity-0 bg-neutral-900/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-md"
+    class="relative my-auto max-h-[calc(100dvh-2rem)] w-full max-w-xl scale-95 overflow-y-auto border border-white/15 bg-neutral-950/95 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-300 sm:max-h-[calc(100dvh-3rem)]"
     id="modal-content"
   >
-    <header class="relative h-48 sm:h-64 overflow-hidden group">
+    <header class="group relative h-44 overflow-hidden sm:h-60">
       <div
-        class="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent z-10"
+        class="absolute inset-0 bg-linear-to-t from-neutral-900 to-transparent z-10"
       >
       </div>
       <img
@@ -27,14 +32,16 @@ import { Icon } from "astro-icon/components";
           id="modal-preview"
           href="#"
           target="_blank"
-          class="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all border border-white/10 hover:scale-110"
+          class="border border-white/10 bg-white/10 p-2 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-white/20"
           title="Visit project"
         >
           <Icon name="mdi:earth" class="w-5 h-5" />
         </a>
         <button
           id="close-modal"
-          class="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all border border-white/10 hover:scale-110 cursor-pointer"
+          type="button"
+          aria-label="Close project details"
+          class="cursor-pointer border border-white/10 bg-white/10 p-2 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-white/20"
           title="Close"
         >
           <Icon name="mdi:close" class="w-5 h-5" />
@@ -50,7 +57,7 @@ import { Icon } from "astro-icon/components";
       </div>
     </header>
 
-    <main class="p-6 pt-2">
+    <main class="p-5 pt-3 sm:p-6 sm:pt-3">
       <p
         id="modal-description"
         class="text-neutral-300 leading-relaxed mb-6 font-light text-sm sm:text-base"
@@ -75,7 +82,7 @@ import { Icon } from "astro-icon/components";
           id="modal-visit"
           href="#"
           target="_blank"
-          class="mt-4 flex items-center justify-center gap-2 w-full py-3 px-4 bg-white text-black font-mono text-sm font-bold rounded-xl hover:bg-neutral-200 transition-colors group"
+          class="group mt-4 flex w-full items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-neutral-200"
         >
           VISIT PROJECT
           <Icon
