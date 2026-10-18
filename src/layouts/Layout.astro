@@ -18,6 +18,10 @@ const {
     "Rodrigo Jose, software developer, portfolio, astro, typescript, javascript, backend, frontend, fullstack",
 }: LayoutProps = Astro.props;
 
+const siteUrl = Astro.site ?? new URL("https://rodrigojose.dev");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const socialImageUrl = new URL("/social-preview.svg", siteUrl);
+
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -42,21 +46,32 @@ const structuredData = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
+    <meta name="author" content="Rodrigo Jose" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={`${Astro.site}${Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rodrigo Jose" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={`${Astro.site}${Astro.url.pathname}`} />
-    <meta property="og:image" content="/social-preview.svg" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content="Rodrigo Jose portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@orodrigojose" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/social-preview.svg" />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content="Rodrigo Jose portfolio" />
 
     <ClientRouter />
   </head>
   <body class="bg-zinc-950 flex flex-col items-center justify-between">
+    <a
+      href="#main-content"
+      class="absolute left-4 top-4 z-50 -translate-y-20 bg-neutral-200 px-3 py-2 text-sm text-neutral-950 transition focus:translate-y-0"
+    >Skip to main content</a>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <header class="w-full">
       <Navbar />
@@ -65,6 +80,7 @@ const structuredData = {
       class="w-full flex flex-col justify-center items-center mt-12 reveal"
       transition:animate="fade"
       id="main-content"
+      tabindex="-1"
     >
       <section class="w-11/12 sm:w-5/6 xl:w-3/5">
         <slot />
@@ -113,5 +129,29 @@ const structuredData = {
     border: 0;
     outline: 0;
     box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--hacking-green);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+      filter: none;
+      transform: none;
+    }
   }
 </style>

@@ -24,6 +24,20 @@ const { name, local } = Astro.props;
       <p class="text-pretty text-lg sm:text-xl text-neutral-50">
         <slot />
       </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a
+          href="/projects"
+          class="border border-neutral-500 px-4 py-2 text-sm text-neutral-200 transition hover:border-white hover:text-white"
+        >
+          View projects
+        </a>
+        <a
+          href="/contact"
+          class="bg-neutral-200 px-4 py-2 text-sm text-neutral-950 transition hover:bg-white"
+        >
+          Contact me
+        </a>
+      </div>
       <Stacks />
     </div>
   </div>

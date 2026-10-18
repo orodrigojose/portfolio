@@ -24,9 +24,10 @@ const socials = [
         socials.map((social: Social, index: number) => (
           <a
             href={social.link}
+            aria-label={social.title}
             class="text-lg hover:text-white hover:scale-105 transition-all"
           >
-            <Icon name={`mdi:${social.title}`} />
+            <Icon name={`mdi:${social.title}`} aria-hidden="true" />
           </a>
         ))
       }
