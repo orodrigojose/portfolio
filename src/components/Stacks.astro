@@ -2,21 +2,37 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div
-  class="flex items-center gap-4 text-2xl py-4 pt-6 px-1.5 text-neutral-300 flex-wrap"
->
-  <Icon name="mdi:language-python" />
-  <Icon name="mdi:language-java" />
-  <Icon name="devicon-plain:spring" />
-  <Icon name="devicon-plain:nestjs" />
-  <Icon name="mdi:language-typescript" />
-  <Icon name="mdi:react" />
-  <Icon name="mdi:sass" />
-  <Icon name="lineicons:tailwindcss" />
-  <Icon name="devicon-plain:astro" />
-  <Icon name="devicon-plain:mysql" />
-  <Icon name="devicon-plain:mongodb" />
-  <Icon name="mdi:aws" />
+<div class="grid gap-4 py-4 pt-6 px-1.5 text-neutral-300 sm:grid-cols-2">
+  <div>
+    <h2 class="mb-2 text-xs uppercase tracking-widest text-neutral-500">Languages</h2>
+    <div class="flex items-center gap-4 text-2xl">
+      <Icon name="mdi:language-python" title="Python" />
+      <Icon name="mdi:language-java" title="Java" />
+      <Icon name="mdi:language-typescript" title="TypeScript" />
+    </div>
+  </div>
+  <div>
+    <h2 class="mb-2 text-xs uppercase tracking-widest text-neutral-500">Frontend</h2>
+    <div class="flex items-center gap-4 text-2xl">
+      <Icon name="mdi:react" title="React" />
+      <Icon name="mdi:sass" title="Sass" />
+      <Icon name="lineicons:tailwindcss" title="Tailwind CSS" />
+      <Icon name="devicon-plain:astro" title="Astro" />
+    </div>
+  </div>
+  <div>
+    <h2 class="mb-2 text-xs uppercase tracking-widest text-neutral-500">Backend</h2>
+    <div class="flex items-center gap-4 text-2xl">
+      <Icon name="devicon-plain:spring" title="Spring" />
+      <Icon name="devicon-plain:nestjs" title="NestJS" />
+    </div>
+  </div>
+  <div>
+    <h2 class="mb-2 text-xs uppercase tracking-widest text-neutral-500">Data & Cloud</h2>
+    <div class="flex items-center gap-4 text-2xl">
+      <Icon name="devicon-plain:mysql" title="MySQL" />
+      <Icon name="devicon-plain:mongodb" title="MongoDB" />
+      <Icon name="mdi:aws" title="AWS" />
+    </div>
+  </div>
 </div>
-
-<style></style>
