@@ -8,8 +8,8 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Rodrigo Jose Developer" description="My Portfolio, that showing experience, projects and background in software development." keywords="Rodrigo Jose,software developer,portfolio,astro,typescript,javascript">
   <main>
-    <section class="reveal">
-      <div class="absolute inset-0 pointer-events-none">
+    <section class="hero-section reveal relative overflow-hidden">
+      <div class="hero-grid absolute inset-0 pointer-events-none">
         <div
           class="absolute inset-0 opacity-25"
           style="
@@ -27,10 +27,12 @@ import Layout from "../layouts/Layout.astro";
         >
         </div>
       </div>
-      <InfoCard name="Rodrigo Jose" local="São Paulo, Brazil">
-        Software Developer focused on backend and full-stack development,
-        building scalable applications and reliable digital products.
-      </InfoCard>
+      <div class="hero-content relative">
+        <InfoCard name="Rodrigo Jose" local="São Paulo, Brazil">
+          Software Developer focused on backend and full-stack development,
+          building scalable applications and reliable digital products.
+        </InfoCard>
+      </div>
     </section>
     <AboutSection class="reveal">
       I am a Software Developer currently working as an Apprentice at Nubank. I
@@ -42,3 +44,40 @@ import Layout from "../layouts/Layout.astro";
     <ProjectsSection class="reveal" />
   </main>
 </Layout>
+
+<style>
+  .hero-grid {
+    animation: hero-grid-drift 24s linear infinite;
+  }
+
+  .hero-content {
+    animation: hero-content-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes hero-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(20px, 20px, 0);
+    }
+  }
+
+  @keyframes hero-content-enter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grid,
+    .hero-content {
+      animation: none;
+    }
+  }
+</style>
