@@ -112,8 +112,8 @@ const links = [
             data-project={JSON.stringify(project)}
           >
             <div class="relative flex cursor-pointer items-center justify-center">
-              <div class="project-node-ring absolute h-7 w-7 rotate-45 border border-white/0 transition-all duration-500 group-hover:rotate-90 group-hover:scale-110 group-hover:border-lime-300/60" />
-              <div class="project-node-dot h-2 w-2 bg-white transition-all duration-300 group-hover:scale-125 group-hover:bg-lime-300" />
+              <div class="project-node-ring absolute h-7 w-7 rotate-45 border border-white/0 transition-all duration-500 group-hover:rotate-90 group-hover:scale-110 group-hover:border-neutral-300/60" />
+              <div class="project-node-dot h-2 w-2 bg-white transition-all duration-300 group-hover:scale-125 group-hover:bg-neutral-300" />
               <div class="project-node-label absolute left-6 overflow-hidden whitespace-nowrap">
                 <span class="block text-[11px] font-light uppercase tracking-widest text-white/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
                   {project.name}
@@ -206,7 +206,7 @@ const links = [
 
   .project-node:hover .project-node-dot,
   .project-node:focus-visible .project-node-dot {
-    outline-color: rgba(190, 242, 100, 0.5);
+    outline-color: rgba(212, 212, 212, 0.5);
     outline-offset: 4px;
   }
 
@@ -217,7 +217,7 @@ const links = [
 
   .project-node:hover .project-node-panel,
   .project-node:focus-visible .project-node-panel {
-    border-color: rgba(190, 242, 100, 0.45);
+    border-color: rgba(163, 163, 163, 0.45);
   }
 
   .project-card {
