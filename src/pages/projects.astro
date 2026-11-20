@@ -70,9 +70,9 @@ const links = [
 <Layout title="Projects" description="A showcase of projects i created including web apps and utilities." keywords="projects,portfolio,Rodrigo Jose,web applications">
   <ModalProject />
   <div
-    class="relative min-h-screen w-full overflow-hidden text-white font-sans tracking-tight md:h-screen"
+    class="projects-page relative min-h-screen w-full overflow-hidden text-white font-sans tracking-tight md:h-screen"
   >
-    <div class="px-6 pt-8 md:absolute md:left-8 md:top-8 md:px-0 md:pt-0">
+    <div class="projects-heading px-6 pt-8 md:absolute md:left-8 md:top-8 md:px-0 md:pt-0">
       <div
         class="flex items-center gap-4 border-l-4 border-neutral-100/10 p-2 text-3xl text-medium"
       >
@@ -85,7 +85,7 @@ const links = [
     </div>
 
     <svg
-      class="absolute inset-0 hidden h-full w-full pointer-events-none md:block"
+      class="project-connections absolute inset-0 hidden h-full w-full pointer-events-none md:block"
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
     >
@@ -101,26 +101,26 @@ const links = [
       }
     </svg>
 
-    <div class="hidden md:block">
+    <div class="project-map hidden md:block">
       {
         projects.map((project) => (
           <button
             type="button"
             aria-label={`Open ${project.name} project details`}
             style={`left: ${project.x}%; top: ${project.y}%; transform: translate(-50%, -50%);`}
-            class="absolute group project-trigger cursor-pointer text-left"
+            class="absolute group project-trigger project-node cursor-pointer text-left"
             data-project={JSON.stringify(project)}
           >
             <div class="relative flex cursor-pointer items-center justify-center">
-              <div class="absolute h-8 w-8 rounded-full border border-white/0 transition-all duration-500 group-hover:scale-125 group-hover:border-white/20" />
-              <div class="h-1.5 w-1.5 rounded-full bg-white transition-all duration-300 group-hover:shadow-white" />
-              <div class="absolute left-6 overflow-hidden whitespace-nowrap">
-                <span class="block text-[11px] font-light uppercase tracking-widest text-white/50 transition-colors group-hover:text-white">
+              <div class="project-node-ring absolute h-7 w-7 rotate-45 border border-white/0 transition-all duration-500 group-hover:rotate-90 group-hover:scale-110 group-hover:border-lime-300/60" />
+              <div class="project-node-dot h-2 w-2 bg-white transition-all duration-300 group-hover:scale-125 group-hover:bg-lime-300" />
+              <div class="project-node-label absolute left-6 overflow-hidden whitespace-nowrap">
+                <span class="block text-[11px] font-light uppercase tracking-widest text-white/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
                   {project.name}
                 </span>
               </div>
             </div>
-            <div class="absolute left-6 top-6 w-48 -translate-x-2.5 border-l border-white/20 bg-white/3 p-3 opacity-0 backdrop-blur-sm transition-all duration-300 group-focus:translate-x-0 group-hover:translate-x-0 group-hover:opacity-100">
+            <div class="project-node-panel absolute left-6 top-6 w-48 -translate-x-2.5 border-l border-white/20 bg-white/3 p-3 opacity-0 backdrop-blur-sm transition-all duration-300 group-focus:translate-x-0 group-hover:translate-x-0 group-hover:opacity-100">
               <p class="text-[10px] font-light leading-relaxed text-white/60">
                 {project.description}
               </p>
@@ -136,13 +136,13 @@ const links = [
           <button
             type="button"
             aria-label={`Open ${project.name} project details`}
-            class="project-trigger group overflow-hidden border border-neutral-800 bg-neutral-900/50 text-left transition hover:border-neutral-500 focus:border-neutral-300"
+            class="project-trigger project-card group overflow-hidden border border-neutral-800 bg-neutral-900/50 text-left transition hover:-translate-y-1 hover:border-neutral-500 focus:border-neutral-300"
             data-project={JSON.stringify(project)}
           >
             <img
               src={project.image}
               alt={`${project.name} project preview`}
-              class="h-44 w-full object-cover brightness-75 transition duration-300 group-hover:brightness-100"
+              class="project-card-image h-44 w-full object-cover brightness-75 transition duration-500 group-hover:scale-105 group-hover:brightness-100"
             />
             <span class="block px-4 pt-4 font-mono text-lg text-neutral-100">
               {project.name}
@@ -163,6 +163,86 @@ const links = [
     </div>
   </div>
 </Layout>
+
+<style>
+  .projects-page {
+    isolation: isolate;
+  }
+
+  .projects-page::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect width='2' height='2' fill='white' fill-opacity='.18'/%3E%3C/svg%3E");
+    background-size: 24px 24px;
+    content: "";
+    opacity: 0.18;
+    pointer-events: none;
+    animation: projects-grid-drift 32s linear infinite;
+  }
+
+  .projects-heading {
+    z-index: 1;
+  }
+
+  .project-connections {
+    opacity: 0.3;
+  }
+
+  .project-connections :global(line) {
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-dasharray: 2 3;
+  }
+
+  .project-node {
+    z-index: 1;
+  }
+
+  .project-node-dot {
+    outline: 1px solid transparent;
+    outline-offset: 0;
+    transition-property: background-color, transform, outline-color, outline-offset;
+  }
+
+  .project-node:hover .project-node-dot,
+  .project-node:focus-visible .project-node-dot {
+    outline-color: rgba(190, 242, 100, 0.5);
+    outline-offset: 4px;
+  }
+
+  .project-node-label,
+  .project-node-panel {
+    transition-property: opacity, transform, color, border-color;
+  }
+
+  .project-node:hover .project-node-panel,
+  .project-node:focus-visible .project-node-panel {
+    border-color: rgba(190, 242, 100, 0.45);
+  }
+
+  .project-card {
+    contain: layout paint;
+  }
+
+  .project-card-image {
+    transform-origin: center;
+  }
+
+  @keyframes projects-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(24px, 24px, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-page::before {
+      animation: none;
+    }
+  }
+</style>
 
 <script>
   const initModal = () => {
