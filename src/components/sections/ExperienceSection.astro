@@ -8,19 +8,15 @@ import { Icon } from "astro-icon/components";
     <Icon name="mdi:work-outline" />
   </div>
   <div class="flex mt-2">
-    <div class="w-1 bg-neutral-500 m-4 flex flex-col items-center rounded-4xl">
-      <div
-        class="z-10 absolute w-4 h-4 bg-neutral-500 rounded-4xl outline-2 outline-neutral-400"
-      >
-      </div>
-      <div
-        class="z-0 relative w-4 h-4 outline-2 outline-neutral-400 animate-ping rounded-4xl opacity-30"
-      >
-      </div>
+    <div class="experience-tracker m-4 self-stretch">
+      <div class="experience-progress"></div>
+      <div class="experience-marker" aria-hidden="true"></div>
     </div>
     <div class="flex flex-col gap-10 text-sm text-gray-200">
-      <div>
-        <div class="flex flex-col">
+      <div class="experience-reveal reveal flex gap-3" style="--experience-delay: 0ms">
+        <img src="/companies/nubank.png" alt="Nubank logo" class="experience-logo" />
+        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1">
           <span class="font-bold text-lg"
             >Apprentice / Nubie | <strong>Nubank</strong></span
           >
@@ -33,11 +29,14 @@ import { Icon } from "astro-icon/components";
             environment.</span
           >
         </div>
+        </div>
       </div>
-      <div>
-        <div class="flex flex-col">
+      <div class="experience-reveal reveal flex gap-3" style="--experience-delay: 100ms">
+        <img src="/companies/tem_credito.jpeg" alt="Tem Credito logo" class="experience-logo" />
+        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1">
           <span class="font-bold text-lg">
-            Junior Software Engineer | <strong>Tem Credito</strong>
+            Software Engineer | <strong>Tem Credito</strong>
           </span>
           <span class="text-gray-500">October 2025 - October 2026.</span>
         </div>
@@ -85,13 +84,113 @@ import { Icon } from "astro-icon/components";
             maintained corporate hardware infrastructure.</span
           >
         </div>
+        </div>
       </div>
-      <div>
-        <div class="flex flex-col">
-          <span class="font-bold text-lg"> IT Support Analyst | Trainee</span>
+      <div class="experience-reveal reveal ml-8 flex gap-3 sm:ml-12" style="--experience-delay: 200ms">
+        <div class="flex flex-col gap-1">
+          <span class="font-bold text-lg">IT Support Analyst | Trainee</span>
+          <strong class="text-neutral-300">Tem Credito</strong>
           <span class="text-gray-500">September 2025 - October 2025.</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .experience-logo {
+    width: 1.75rem;
+    height: 1.75rem;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .experience-tracker {
+    position: relative;
+    width: 4px;
+    min-height: 100%;
+    overflow: visible;
+    border-radius: 999px;
+    background: rgba(115, 115, 115, 0.35);
+  }
+
+  .experience-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(100% - var(--experience-progress, 100%));
+    border-radius: inherit;
+    background: rgb(163, 163, 163);
+    transition: height 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .experience-marker {
+    position: absolute;
+    top: var(--experience-progress, 0%);
+    left: 50%;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 2px solid rgb(212, 212, 212);
+    background: rgb(115, 115, 115);
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    transition: top 700ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease;
+  }
+
+  .experience-marker.is-moving {
+    background: var(--hacking-green);
+  }
+
+  .experience-reveal {
+    transition-delay: var(--experience-delay);
+  }
+
+  @media (max-width: 640px) {
+    .experience-logo {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-progress,
+    .experience-marker {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const initExperienceTracker = () => {
+    const entries = Array.from(document.querySelectorAll<HTMLElement>(".experience-reveal"));
+    const tracker = document.querySelector<HTMLElement>(".experience-tracker");
+    const marker = document.querySelector<HTMLElement>(".experience-marker");
+
+    if (!tracker || !marker || entries.length === 0) return;
+
+    let currentProgress = 100;
+
+    const observer = new IntersectionObserver(
+      (observedEntries) => {
+        observedEntries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const index = entries.indexOf(entry.target as HTMLElement);
+          const progress = entries.length === 1 ? 0 : 100 - (index / (entries.length - 1)) * 100;
+
+          if (progress >= currentProgress) return;
+
+          currentProgress = progress;
+          tracker.style.setProperty("--experience-progress", `${progress}%`);
+          marker.classList.add("is-moving");
+        });
+      },
+      { threshold: 0.45 },
+    );
+
+    entries.forEach((entry) => observer.observe(entry));
+  };
+
+  document.addEventListener("astro:page-load", initExperienceTracker);
+</script>
