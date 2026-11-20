@@ -20,9 +20,9 @@ const skills = [
 ---
 
 <Layout title="About Rodrigo" description="Learn more about me, a software engineer with experience in backend and full-stack development." keywords="Rodrigo Jose,about,software engineer,backend,fullstack">
-  <div class="absolute inset-0 pointer-events-none">
+  <div class="about-background absolute inset-0 overflow-hidden pointer-events-none">
     <div
-      class="absolute inset-0 opacity-10"
+      class="about-grid absolute inset-0 opacity-10"
       style="
           background-image: radial-gradient(white 1px, transparent 1px);
           background-size: 20px 20px;
@@ -124,3 +124,24 @@ const skills = [
     </div>
   </section>
 </Layout>
+
+<style>
+  .about-grid {
+    animation: about-grid-drift 28s linear infinite;
+  }
+
+  @keyframes about-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(20px, 20px, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-grid {
+      animation: none;
+    }
+  }
+</style>
